@@ -1,28 +1,24 @@
 {
   lib,
   inputs,
-  stdenv,
   system,
-  pkgs,
+  buildGoModule,
   ...
 }: let
   filterSystem = s:
     {
       "x86_64-linux" = {
-        extension = "tar.gz";
-        sha256 = "sha256-tXnTnwf7OS5f6tFRZEl8UwxjuSmCj5EJwdGtxN4xbZk=";
+        sha256 = "${lib.fakeHash}";
         system = "linux_amd64";
       };
     }
     .${s}
     or (throw "Unsupported system: ${s}");
-  metadata = {
-    system = "linux_amd64"; 
-  };
+  metadata = filterSystem system;
   name = "bootdev";
   version = "v0.0.1";
 in
-  pkgs.buildGoModule {
+  buildGoModule rec {
     inherit name version;
     src = inputs.bootdev;
     # vendorHash = "${lib.fakeHash}"; # also lib.fakeSHA256
