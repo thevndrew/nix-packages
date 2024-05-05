@@ -22,8 +22,8 @@
       }: {
         devShells = {
           default = pkgs.mkShell {
-            inputsFrom = [ self'.packages.bootdev ];
-            nativeBuildInputs = [ pkgs.just self'.packages.bootdev ];
+            inputsFrom = [ self'.packages.bootdev self'.packages.megadl ];
+            nativeBuildInputs = [ pkgs.just self'.packages.bootdev self'.packages.megadl ];
           };
         };
 
@@ -31,6 +31,7 @@
 
         packages = {
           bootdev = pkgs.callPackage ./pkgs/bootdev { inherit inputs; };
+          megadl = pkgs.callPackage ./pkgs/megadl { inherit inputs; };
         };
       };
     };
