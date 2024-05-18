@@ -9,8 +9,8 @@
   };
 
   outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" ];
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux"];
 
       perSystem = {
         config,
@@ -22,16 +22,16 @@
       }: {
         devShells = {
           default = pkgs.mkShell {
-            inputsFrom = [ self'.packages.bootdev self'.packages.megadl ];
-            nativeBuildInputs = [ pkgs.just self'.packages.bootdev self'.packages.megadl ];
+            inputsFrom = [self'.packages.bootdev self'.packages.megadl];
+            nativeBuildInputs = [pkgs.just self'.packages.bootdev self'.packages.megadl];
           };
         };
 
         formatter = pkgs.alejandra;
 
         packages = {
-          bootdev = pkgs.callPackage ./pkgs/bootdev { inherit inputs; };
-          megadl = pkgs.callPackage ./pkgs/megadl { inherit inputs; };
+          bootdev = pkgs.callPackage ./pkgs/bootdev {inherit inputs;};
+          megadl = pkgs.callPackage ./pkgs/megadl {inherit inputs;};
         };
       };
     };

@@ -19,8 +19,8 @@
   version = "0.0.1";
 in
   with python3Packages;
-  buildPythonApplication {
-    inherit name version;
-    propagatedBuildInputs = with pkgs; [ megatools python3Packages.requests ];
-    src = ./.;
-  }
+    buildPythonApplication {
+      inherit name version;
+      propagatedBuildInputs = with pkgs; [megatools python3Packages.requests];
+      src = ./.;
+    }
