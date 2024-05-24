@@ -22,8 +22,20 @@
       }: {
         devShells = {
           default = pkgs.mkShell {
-            inputsFrom = [self'.packages.bootdev self'.packages.megadl];
-            nativeBuildInputs = [pkgs.just self'.packages.bootdev self'.packages.megadl];
+            inputsFrom = with self'.packages; [
+              bootdev
+              megadl
+              patreon-dl-fmt
+            ];
+            nativeBuildInputs =
+              (with pkgs; [
+                just
+              ])
+              ++ (with self'.packages; [
+                bootdev
+                megadl
+                patreon-dl-fmt
+              ]);
           };
         };
 
@@ -32,6 +44,7 @@
         packages = {
           bootdev = pkgs.callPackage ./pkgs/bootdev {inherit inputs;};
           megadl = pkgs.callPackage ./pkgs/megadl {inherit inputs;};
+          patreon-dl-fmt = pkgs.callPackage ./pkgs/patreon-dl-fmt {inherit inputs;};
         };
       };
     };
