@@ -25,7 +25,7 @@
             inputsFrom = with self'.packages; [
               bootdev
               megadl
-              patreon-dl-fmt
+              cockpit-podman
             ];
             nativeBuildInputs =
               (with pkgs; [
@@ -34,7 +34,7 @@
               ++ (with self'.packages; [
                 bootdev
                 megadl
-                patreon-dl-fmt
+                cockpit-podman
               ]);
           };
         };
@@ -44,7 +44,7 @@
         packages = {
           bootdev = pkgs.callPackage ./pkgs/bootdev {inherit inputs;};
           megadl = pkgs.callPackage ./pkgs/megadl {inherit inputs;};
-          patreon-dl-fmt = pkgs.callPackage ./pkgs/patreon-dl-fmt {inherit inputs;};
+          cockpit-podman = pkgs.callPackage ./pkgs/cockpit-podman {inherit inputs;};
         };
       };
     };
