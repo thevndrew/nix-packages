@@ -40,7 +40,7 @@ def call_megatools(url, output_dir, proxy):
         sp = Popen(command, stdout=PIPE, stderr=STDOUT, bufsize=1, text=True)
         stall_count = 0
 
-        print(f'Starting Download with:\n{" ".join(command)}')
+        logger.info(f'Starting Download with:\n{" ".join(command)}')
 
         for line in sp.stdout:
             if stall_count == 60:
@@ -63,9 +63,9 @@ def call_megatools(url, output_dir, proxy):
             ]
 
             if any(error.lower() in line.lower() for error in errors):
-                print(f"{line} (Hit an error trying another proxy)")
+                logger.error(f"{line} (Hit an error trying another proxy)")
                 return False
-            print(line, flush=True, end='')
+            logger.info(line, flush=True, end='')
         return True
     except OSError as e:
         logger.error(f"Error calling 'megatools' for URL '{url}', with proxy '{proxy}': {e}")
