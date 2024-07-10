@@ -21,6 +21,5 @@ in
   buildGoModule rec {
     inherit name version;
     src = inputs.bootdev;
-    # vendorHash = "${lib.fakeHash}"; # also lib.fakeSHA256
-    vendorHash = "sha256-v5P+Pt9weZ6+kkxfgpk+8GIOJRqp+Jx5uF3AJdRnp0s=";
+    vendorHash = "sha256-jhRoPXgfntDauInD+F7koCaJlX4XDj+jQSe/uEEYIMM=";
   }

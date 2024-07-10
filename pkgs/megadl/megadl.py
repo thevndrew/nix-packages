@@ -65,7 +65,7 @@ def call_megatools(url, output_dir, proxy):
             if any(error.lower() in line.lower() for error in errors):
                 logger.error(f"{line} (Hit an error trying another proxy)")
                 return False
-            logger.info(line, flush=True, end='')
+            logger.info(line.rstrip())
         return True
     except OSError as e:
         logger.error(f"Error calling 'megatools' for URL '{url}', with proxy '{proxy}': {e}")
