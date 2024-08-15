@@ -1,14 +1,17 @@
 {
   inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     bootdev = {
       url = "github:bootdotdev/bootdev";
       flake = false;
     };
   };
 
-  outputs = inputs @ {flake-parts, ...}:
+  outputs = inputs @ {flake-parts, ...}
+  :
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
 
@@ -19,23 +22,21 @@
         pkgs,
         system,
         ...
-      }: {
+      }: let
+        pkgs-list = with self'.packages; [
+          bootdev
+          chrome-wrapper
+          crx-dl
+          megadl
+        ];
+      in {
         devShells = {
           default = pkgs.mkShell {
-            inputsFrom = with self'.packages; [
-              bootdev
-              megadl
-              cockpit-podman
-            ];
             nativeBuildInputs =
               (with pkgs; [
                 just
               ])
-              ++ (with self'.packages; [
-                bootdev
-                megadl
-                cockpit-podman
-              ]);
+              ++ pkgs-list;
           };
         };
 
@@ -43,8 +44,10 @@
 
         packages = {
           bootdev = pkgs.callPackage ./pkgs/bootdev {inherit inputs;};
-          megadl = pkgs.callPackage ./pkgs/megadl {inherit inputs;};
+          chrome-wrapper = pkgs.callPackage ./pkgs/chrome-wrapper {inherit inputs;};
           cockpit-podman = pkgs.callPackage ./pkgs/cockpit-podman {inherit inputs;};
+          crx-dl = pkgs.callPackage ./pkgs/crx-dl {inherit inputs;};
+          megadl = pkgs.callPackage ./pkgs/megadl {inherit inputs;};
         };
       };
     };
