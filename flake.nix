@@ -9,11 +9,6 @@
       flake = false;
     };
 
-    nvim-dbee = {
-      url = "github:kndndrj/nvim-dbee";
-      flake = false;
-    };
-
     yt-dlp-youtube-oauth2 = {
       url = "github:coletdjnz/yt-dlp-youtube-oauth2";
       flake = false;
@@ -45,7 +40,6 @@
           megadl
           yt-dlp-get-pot
           yt-dlp-youtube-oauth2
-          nvim-debee
         ];
       in {
         devShells = {
@@ -68,7 +62,6 @@
           megadl = pkgs.callPackage ./pkgs/megadl {inherit inputs;};
           yt-dlp-get-pot = pkgs.callPackage ./pkgs/yt-dlp-get-pot {inherit inputs;};
           yt-dlp-youtube-oauth2 = pkgs.callPackage ./pkgs/yt-dlp-youtube-oauth2 {inherit inputs;};
-          nvim-debee = pkgs.callPackage ./pkgs/nvim-debee {inherit inputs;};
         };
       };
     };
