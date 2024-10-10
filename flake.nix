@@ -8,6 +8,21 @@
       url = "github:bootdotdev/bootdev";
       flake = false;
     };
+
+    nvim-dbee = {
+      url = "github:kndndrj/nvim-dbee";
+      flake = false;
+    };
+
+    yt-dlp-youtube-oauth2 = {
+      url = "github:coletdjnz/yt-dlp-youtube-oauth2";
+      flake = false;
+    };
+
+    yt-dlp-get-pot = {
+      url = "github:coletdjnz/yt-dlp-get-pot";
+      flake = false;
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}
@@ -25,9 +40,12 @@
       }: let
         pkgs-list = with self'.packages; [
           bootdev
-          chrome-wrapper
+          # chrome-wrapper
           crx-dl
           megadl
+          yt-dlp-get-pot
+          yt-dlp-youtube-oauth2
+          nvim-debee
         ];
       in {
         devShells = {
@@ -48,6 +66,9 @@
           cockpit-podman = pkgs.callPackage ./pkgs/cockpit-podman {inherit inputs;};
           crx-dl = pkgs.callPackage ./pkgs/crx-dl {inherit inputs;};
           megadl = pkgs.callPackage ./pkgs/megadl {inherit inputs;};
+          yt-dlp-get-pot = pkgs.callPackage ./pkgs/yt-dlp-get-pot {inherit inputs;};
+          yt-dlp-youtube-oauth2 = pkgs.callPackage ./pkgs/yt-dlp-youtube-oauth2 {inherit inputs;};
+          nvim-debee = pkgs.callPackage ./pkgs/nvim-debee {inherit inputs;};
         };
       };
     };
